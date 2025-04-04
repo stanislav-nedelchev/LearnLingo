@@ -1,0 +1,35 @@
+.btnAuth {
+  display: flex;
+  gap: 16px;
+}
+
+.btnLogIn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  background-color: transparent;
+  padding: 0;
+}
+
+.svgLogIn {
+  stroke: var(--theme);
+  fill: transparent;
+}
+
+.btnReg {
+  border-radius: 12px;
+  padding: 14px 39px;
+  height: 48px;
+  background-color: var(--main);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  color: var(--white);
+}
+
+.userName {
+  color: var(--theme);
+}

@@ -35,6 +35,7 @@
 :root {
   --main: #121417;
   --white: #fff;
+  --theme: #f4c550;
   /* --gray: #8d929a;
   --gray-light: #dadde1;
   --badges: #f2f4f7;
@@ -75,6 +76,7 @@ img {
 button {
   cursor: pointer;
   font-family: inherit;
+  border: none;
 }
 
 h1,
