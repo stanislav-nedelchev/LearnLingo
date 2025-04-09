@@ -1,6 +1,7 @@
 .btnAuth {
   display: flex;
-  gap: 16px;
+  align-items: center;
+  gap: 10px;
 }
 
 .btnLogIn {
@@ -11,7 +12,14 @@
   font-size: 16px;
   line-height: 1.25;
   background-color: transparent;
-  padding: 0;
+  padding: 6px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.btnLogIn:hover {
+  border-color: var(--theme);
 }
 
 .svgLogIn {
@@ -21,6 +29,7 @@
 
 .btnReg {
   border-radius: 12px;
+  border: 1px solid transparent;
   padding: 14px 39px;
   height: 48px;
   background-color: var(--main);
@@ -28,6 +37,22 @@
   font-size: 16px;
   line-height: 1.25;
   color: var(--white);
+  transition: all 0.2s ease;
+}
+
+.btnReg:hover,
+.btnReg:focus {
+  background-color: var(--white);
+  color: var(--main);
+  border-color: var(--main);
+}
+
+.userNameText {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  background-color: transparent;
+  padding: 6px;
 }
 
 .userName {

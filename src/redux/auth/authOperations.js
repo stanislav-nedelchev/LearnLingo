@@ -90,8 +90,6 @@ export const apiGetCurrentUser = createAsyncThunk(
               },
               token: currentUser.accessToken,
             };
-            console.log(data);
-
             resolve(data);
           } else {
             return reject('Пользователь не аутентифицирован');

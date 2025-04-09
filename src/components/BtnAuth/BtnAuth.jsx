@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import css from './BtnAuth.module.css';
-import LoginForm from '../LoginForm/LoginForm.jsx';
-import RegistrationForm from '../RegistrationForm/RegistrationForm.jsx';
-import { selectUserData } from '../../redux/auth/authSelector.js';
 import { useDispatch, useSelector } from 'react-redux';
+import { selectUserData } from '../../redux/auth/authSelector.js';
 import { apiLogoutUser } from '../../redux/auth/authOperations.js';
+import RegistrationForm from '../RegistrationForm/RegistrationForm.jsx';
+import LoginForm from '../LoginForm/LoginForm.jsx';
+import Modal from '../Modal/Modal.jsx';
+import css from './BtnAuth.module.css';
 
 const BtnAuth = ({ isLoggedIn }) => {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const BtnAuth = ({ isLoggedIn }) => {
     <>
       {isLoggedIn ? (
         <div className={css.btnAuth}>
-          <p className={css.btnLogIn}>
+          <p className={css.userNameText}>
             Hello, <span className={css.userName}>{user.name}</span>
           </p>
           <button className={css.btnReg} type="button" onClick={handleLogout}>
@@ -40,12 +41,12 @@ const BtnAuth = ({ isLoggedIn }) => {
             </svg>
             Log In
           </button>
-          {isLoginModalOpen && (
-            <LoginForm
-              isOpen={isLoginModalOpen}
-              onClose={() => setIsLoginModalOpen(false)}
-            />
-          )}
+          <Modal
+            isOpen={isLoginModalOpen}
+            onClose={() => setIsLoginModalOpen(false)}
+          >
+            <LoginForm onClose={() => setIsLoginModalOpen(false)} />
+          </Modal>
 
           <button
             className={css.btnReg}
@@ -54,12 +55,14 @@ const BtnAuth = ({ isLoggedIn }) => {
           >
             Registration
           </button>
-          {isRegistrationModalOpen && (
+          <Modal
+            isOpen={isRegistrationModalOpen}
+            onClose={() => setIsRegistrationModalOpen(false)}
+          >
             <RegistrationForm
-              isOpen={isRegistrationModalOpen}
               onClose={() => setIsRegistrationModalOpen(false)}
             />
-          )}
+          </Modal>
         </div>
       )}
     </>

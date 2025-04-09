@@ -6,6 +6,7 @@ import Header from './components/Header/Header.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { apiGetCurrentUser } from './redux/auth/authOperations.js';
 import { selectUserDataIsRefreshing } from './redux/auth/authSelector.js';
+import PrivateRoute from './components/PrivateRoute.jsx';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage.jsx'));
 const TeachersPage = lazy(() =>
@@ -34,7 +35,11 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/teachers" element={<TeachersPage />} />
-          <Route path="/favorites" element={<FavoritesPage />} />
+          {/* <Route path="/favorites" element={<FavoritesPage />} /> */}
+          <Route
+            path="/favorites"
+            element={<PrivateRoute component={<FavoritesPage />} />}
+          />
         </Routes>
       </Suspense>
       <Toaster position="top-right" reverseOrder={false} />

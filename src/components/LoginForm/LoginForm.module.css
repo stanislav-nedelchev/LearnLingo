@@ -1,35 +1,35 @@
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  overflow: hidden;
-  overflow-y: auto;
-  transition: opacity 0.3s;
-  z-index: 999;
-}
-
-.modalWrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  min-height: 100%;
-}
-
-.modalContent {
+.formBox {
   position: relative;
+  height: 506px;
+  width: 566px;
   border-radius: 30px;
   padding: 64px;
-  width: 100%;
-  max-width: 565px;
-  height: 599px;
   background-color: var(--white);
+}
+
+.modalCloseButton {
+  position: absolute;
+  border: none;
+  outline: none;
+  top: 20px;
+  right: 20px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.modalCloseButton:hover,
+.modalCloseButton:focus {
+  filter: brightness(1.1);
+  outline: 1px solid var(--theme);
+  border-radius: 50%;
+}
+
+.svgClose {
+  stroke: var(--theme);
 }
 
 .formTitle {
@@ -77,4 +77,10 @@
   width: 100%;
   height: 60px;
   background-color: var(--theme);
+  transition: all 0.3s ease;
+}
+
+.formBtn:hover,
+.formBtn:focus {
+  filter: brightness(1.1);
 }

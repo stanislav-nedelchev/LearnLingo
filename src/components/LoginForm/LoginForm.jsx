@@ -1,145 +1,112 @@
-// import { signInWithEmailAndPassword } from 'firebase/auth';
-// import { useState } from 'react';
-// import { auth } from '../../api/firebaseConfig.js';
-// import css from './LoginForm.module.css';
-
-// const LoginForm = ({ isOpen, onClose }) => {
-//   const [email, setEmail] = useState('');
-//   const [password, setPassword] = useState('');
-//   const [error, setError] = useState('');
-
-//   const onWrapperClick = event => {
-//     if (event.target.classList.contains(css.modalWrapper)) onClose();
-//   };
-
-//   const handleSubmit = async e => {
-//     e.preventDefault();
-//     try {
-//       await signInWithEmailAndPassword(auth, email, password);
-//       alert('Вы успешно вошли в систему');
-//       onClose();
-//     } catch (error) {
-//       setError(error.message);
-//     }
-//   };
-
-//   return (
-//     <>
-//       {isOpen && (
-//         <div className={css.modal}>
-//           <div className={css.modalWrapper} onClick={onWrapperClick}>
-//             <div className={css.modalContent}>
-//               <h2>Авторизация</h2>
-//               <form onSubmit={handleSubmit}>
-//                 <input
-//                   type="email"
-//                   placeholder="Email"
-//                   value={email}
-//                   onChange={e => setEmail(e.target.value)}
-//                   required
-//                 />
-//                 <input
-//                   type="password"
-//                   placeholder="Пароль"
-//                   value={password}
-//                   onChange={e => setPassword(e.target.value)}
-//                   required
-//                 />
-//                 <button type="submit">Войти</button>
-//               </form>
-//               {error && <p>{error}</p>}
-//             </div>
-//           </div>
-//         </div>
-//       )}
-//     </>
-//   );
-// };
-
-// export default LoginForm;
-
-import { useDispatch } from 'react-redux';
-import { apiLoginUser } from '../../redux/auth/authOperations.js';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import css from './LoginForm.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { selectUserDataIsLoading } from '../../redux/auth/authSelector.js';
+import { apiLoginUser } from '../../redux/auth/authOperations.js';
 import { LoginUserSchema } from '../../utils/schemas.js';
+import Loader from '../Loader/Loader.jsx';
+import toast from 'react-hot-toast';
+import css from './LoginForm.module.css';
 
-const LoginForm = ({ isOpen, onClose }) => {
-  const INITIAL_VALUES = {
+const RegistrationForm = ({ onClose }) => {
+  const dispatch = useDispatch();
+  const isLoading = useSelector(selectUserDataIsLoading);
+
+  const [formData, setFormData] = useState({
     email: '',
     password: '',
-  };
-
-  const dispatch = useDispatch();
-
-  const onWrapperClick = event => {
-    if (event.target.classList.contains(css.modalWrapper)) onClose();
-  };
+  });
 
   const handleSubmit = values => {
+    setFormData(values);
+
     dispatch(apiLoginUser(values))
       .unwrap()
+      .then(() => {
+        onClose();
+        toast.success('Authorization was successful');
+      })
       .catch(error => {
-        console.log(error);
-
         if (error === 'Firebase: Error (auth/invalid-credential).') {
-          alert('You have entered an incorrect username or password');
+          toast.error('You have entered an incorrect username or password');
+        } else {
+          toast.error('Authorization failed. Please try again later.');
         }
       });
-    onClose();
-    // actions.resetForm();
   };
 
   return (
-    <>
-      {isOpen && (
-        <div className={css.modal}>
-          <div className={css.modalWrapper} onClick={onWrapperClick}>
-            <div className={css.modalContent}>
-              <Formik
-                initialValues={INITIAL_VALUES}
-                validationSchema={LoginUserSchema}
-                onSubmit={handleSubmit}
-              >
-                <Form className={css.form}>
-                  <label className={css.label}>
-                    <span>Email:</span>
-                    <Field
-                      type="text"
-                      name="email"
-                      className={css.input}
-                      placeholder="example.email@example.com"
-                    />
-                    <ErrorMessage
-                      className={css.errorMessage}
-                      name="email"
-                      component="span"
-                    />
-                  </label>
-                  <label className={css.label}>
-                    <span>Password:</span>
-                    <Field
-                      type="password"
-                      name="password"
-                      className={css.input}
-                      placeholder="Enter your password"
-                    />
-                    <ErrorMessage
-                      className={css.errorMessage}
-                      name="password"
-                      component="span"
-                    />
-                  </label>
+    <div className={css.formBox}>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <button
+            type="button"
+            className={css.modalCloseButton}
+            onClick={() => onClose()}
+          >
+            <svg width="32" height="32" className={css.svgClose}>
+              <use href="/sprite.svg#close"></use>
+            </svg>
+          </button>
+          <h2 className={css.formTitle}>Log In</h2>
+          <p className={css.formText}>
+            Welcome back! Please enter your credentials to access your account
+            and continue your search for an teacher.
+          </p>
+          <Formik
+            initialValues={formData}
+            validationSchema={LoginUserSchema}
+            onSubmit={handleSubmit}
+          >
+            {({ values, handleChange }) => (
+              <Form>
+                <label className={css.label}>
+                  <Field
+                    type="text"
+                    name="email"
+                    className={css.input}
+                    placeholder="Email"
+                    value={values.email}
+                    onChange={handleChange}
+                  />
+                  <ErrorMessage
+                    className={css.errorMessage}
+                    name="email"
+                    component="span"
+                  />
+                </label>
+                <label className={css.label}>
+                  <Field
+                    type="password"
+                    name="password"
+                    className={css.input}
+                    placeholder="Password"
+                    value={values.password}
+                    onChange={handleChange}
+                  />
+                  <ErrorMessage
+                    className={css.errorMessage}
+                    name="password"
+                    component="span"
+                  />
+                </label>
 
-                  <button type="submit">LogIn</button>
-                </Form>
-              </Formik>
-            </div>
-          </div>
-        </div>
+                <button
+                  type="submit"
+                  className={css.formBtn}
+                  disabled={isLoading}
+                >
+                  Log In
+                </button>
+              </Form>
+            )}
+          </Formik>
+        </>
       )}
-    </>
+    </div>
   );
 };
 
-export default LoginForm;
+export default RegistrationForm;
