@@ -57,7 +57,7 @@ const authSlice = createSlice({
       .addCase(apiGetCurrentUser.fulfilled, (state, action) => {
         state.isRefreshing = false;
         state.isLoggedIn = true;
-        state.userData = action.payload;
+        state.userData = action.payload.user;
       })
       .addCase(apiGetCurrentUser.rejected, (state, action) => {
         state.isRefreshing = false;

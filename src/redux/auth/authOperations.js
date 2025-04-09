@@ -1,4 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut,
+  updateProfile,
+} from 'firebase/auth';
+import { auth } from '../../api/firebaseConfig.js';
 import axios from 'axios';
 
 export const authInstance = axios.create({
@@ -18,87 +26,91 @@ export const clearToken = () => {
 
 export const apiRegisterUser = createAsyncThunk(
   'auth/registerUser',
-  async (formData, thunkApi) => {
-    // formData -> { "name": "Adrian Cross", "email": "across@mail.com",  "password": "examplepwd12345" }
+  async ({ name, email, password }, { rejectWithValue }) => {
     try {
-      const { data } = await authInstance.post('/users/signup', formData);
-      // {
-      //     "user": {
-      //         "name": "John Taco",
-      //         "email": "1231241sadwda213wd@gmail.com"
-      //     },
-      //     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzJiYmYxOWM0OTVlZDZlMjVmMzhkYzUiLCJpYXQiOjE3MzA5MjAyMTd9.YLCxvnYkkYJDZzyDlOTJs71Ulev9u4OAEVP7a3OVb8c"
-      // }
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
 
-      setToken(data.token);
-      console.log('data: ', data);
+      await updateProfile(userCredential.user, {
+        displayName: name,
+      });
 
-      return data;
+      return {
+        user: {
+          name: userCredential.user.displayName,
+          email: userCredential.user.email,
+          id: userCredential.user.uid,
+        },
+        token: userCredential.user.accessToken,
+      };
     } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
+      return rejectWithValue(error.message);
     }
   },
 );
 
 export const apiLoginUser = createAsyncThunk(
   'auth/loginUser',
-  async (formData, thunkApi) => {
-    // formData -> { "email": "across@mail.com",  "password": "examplepwd12345" }
+  async ({ email, password }, { rejectWithValue }) => {
     try {
-      const { data } = await authInstance.post('/users/login', formData);
-      // {
-      //     "user": {
-      //         "name": "John Taco",
-      //         "email": "1231241sadwda213wd@gmail.com"
-      //     },
-      //     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzJiYmYxOWM0OTVlZDZlMjVmMzhkYzUiLCJpYXQiOjE3MzA5MjAyMTd9.YLCxvnYkkYJDZzyDlOTJs71Ulev9u4OAEVP7a3OVb8c"
-      // }
-
-      setToken(data.token);
-      console.log('data: ', data);
-
-      return data;
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      return {
+        user: {
+          name: userCredential.user.displayName,
+          email: userCredential.user.email,
+          id: userCredential.user.uid,
+        },
+        token: userCredential.user.accessToken,
+      };
     } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
+      return rejectWithValue(error.message);
     }
   },
 );
 
 export const apiGetCurrentUser = createAsyncThunk(
   'auth/getCurrentUser',
-  async (_, thunkApi) => {
-    const state = thunkApi.getState();
-    const token = state.auth.token;
-
-    if (!token) {
-      return thunkApi.rejectWithValue('No token provided to refresh user data');
-    }
-
+  async (_, { rejectWithValue }) => {
     try {
-      setToken(token);
-      const { data } = await authInstance.get('/users/current');
+      return new Promise((resolve, reject) => {
+        onAuthStateChanged(auth, currentUser => {
+          if (currentUser) {
+            const data = {
+              user: {
+                name: currentUser.displayName,
+                email: currentUser.email,
+                id: currentUser.uid,
+              },
+              token: currentUser.accessToken,
+            };
+            console.log(data);
 
-      console.log('data: ', data);
-
-      return data;
+            resolve(data);
+          } else {
+            return reject('Пользователь не аутентифицирован');
+          }
+        });
+      });
     } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
+      throw rejectWithValue(error.message);
     }
   },
 );
 
 export const apiLogoutUser = createAsyncThunk(
   'auth/logoutUser',
-  async (_, thunkApi) => {
+  async (_, { rejectWithValue }) => {
     try {
-      const { data } = await authInstance.post('/users/logout');
-
-      clearToken();
-      console.log('data: ', data);
-
-      return data;
+      await signOut(auth);
     } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
+      throw rejectWithValue(error.message);
     }
   },
 );

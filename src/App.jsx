@@ -1,8 +1,11 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Loader from './components/Loader/Loader.jsx';
 import { Toaster } from 'react-hot-toast';
 import Header from './components/Header/Header.jsx';
+import { useDispatch, useSelector } from 'react-redux';
+import { apiGetCurrentUser } from './redux/auth/authOperations.js';
+import { selectUserDataIsRefreshing } from './redux/auth/authSelector.js';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage.jsx'));
 const TeachersPage = lazy(() =>
@@ -13,6 +16,17 @@ const FavoritesPage = lazy(() =>
 );
 
 function App() {
+  const dispatch = useDispatch();
+  const isRefreshing = useSelector(selectUserDataIsRefreshing);
+
+  useEffect(() => {
+    dispatch(apiGetCurrentUser());
+  }, [dispatch]);
+
+  if (isRefreshing) {
+    return <Loader />;
+  }
+
   return (
     <>
       <Header />
@@ -23,7 +37,7 @@ function App() {
           <Route path="/favorites" element={<FavoritesPage />} />
         </Routes>
       </Suspense>
-      <Toaster />
+      <Toaster position="top-right" reverseOrder={false} />
     </>
   );
 }
