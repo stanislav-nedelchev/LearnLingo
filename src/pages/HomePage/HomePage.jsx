@@ -1,7 +1,8 @@
-import HeroBtn from '../../components/HeroBtn/HeroBtn.jsx';
+import { useNavigate } from 'react-router-dom';
 import css from './HomePage.module.css';
 
 const HomePage = () => {
+  const navigate = useNavigate();
   return (
     <section className={css.section}>
       <div className={css.heroMainInfo}>
@@ -15,7 +16,13 @@ const HomePage = () => {
             Elevate your language proficiency to new heights by connecting with
             highly qualified and experienced tutors.
           </p>
-          <HeroBtn />
+          <button
+            className={css.heroBtn}
+            type="button"
+            onClick={() => navigate('/teachers')}
+          >
+            Get started
+          </button>
         </div>
         <div className={css.heroRightPart}>
           <img src="/heroImg.png" alt="Hero image" />
