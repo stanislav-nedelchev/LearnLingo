@@ -1,0 +1,89 @@
+.section {
+  max-width: 1440px;
+  padding: 0 64px 20px;
+  margin: auto;
+}
+
+.heroMainInfo {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.heroLeftPart {
+  border-radius: 30px;
+  width: 720px;
+  height: 530px;
+  background-color: var(--background);
+  padding: 98px 64px;
+}
+
+.heroTitle {
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 1.16667;
+  letter-spacing: -0.02em;
+  margin-bottom: 32px;
+}
+
+.heroTitleSpan {
+  font-style: italic;
+  font-weight: 400;
+  background-color: var(--theme-light);
+  border-radius: 8px;
+  padding: 0 6px;
+}
+
+.heroText {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.375;
+  letter-spacing: -0.02em;
+  max-width: 470px;
+  margin-bottom: 64px;
+}
+
+.heroInfo {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 116px;
+}
+
+.svgRectangle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  stroke: var(--theme);
+}
+
+.infoList {
+  display: flex;
+  align-items: center;
+  gap: 100px;
+}
+
+.infoItem {
+  display: flex;
+  align-items: stretch;
+  gap: 16px;
+}
+
+.infoItemNumber {
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 1.14286;
+  letter-spacing: -0.02em;
+}
+
+.infoItemText {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.02em;
+  opacity: 0.7;
+  width: 93px;
+}

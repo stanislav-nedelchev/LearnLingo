@@ -19,6 +19,10 @@
   <circle cx="6" cy="6" r="4" fill="#38CD3E" />
 </symbol>
 
+<symbol id="rectangle" viewBox="0 0 1312 116" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="0.75" y="0.75" width="1310.5" height="114.5" rx="29.25" stroke-width="1.5" stroke-dasharray="15 15"/>
+</symbol>
+
 <symbol id="chevron-down" viewBox="0 0 32 32">
 <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3.2" d="M8 12l8 8 8-8"></path>
 </symbol>

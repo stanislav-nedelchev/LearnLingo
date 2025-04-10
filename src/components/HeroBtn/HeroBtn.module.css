@@ -1,0 +1,16 @@
+.heroBtn {
+  border-radius: 12px;
+  padding: 16px 88px;
+  width: 267px;
+  height: 60px;
+  background-color: var(--theme);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.55556;
+  transition: all 0.3s ease;
+}
+
+.heroBtn:hover,
+.heroBtn:focus {
+  filter: brightness(1.1);
+}

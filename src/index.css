@@ -10,6 +10,13 @@
 @font-face {
   font-display: swap;
   font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 400;
+  src: url('../fonts/roboto-v47-latin-italic.woff2') format('woff2');
+}
+@font-face {
+  font-display: swap;
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;
   src: url('../fonts/roboto-v47-latin-500.woff2') format('woff2');
@@ -36,12 +43,8 @@
   --main: #121417;
   --white: #fff;
   --theme: #f4c550;
-  /* --gray: #8d929a;
-  --gray-light: #dadde1;
-  --badges: #f2f4f7;
-  --inputs: #f7f7f7;
-  --button: #3470ff;
-  --button-hover: #0b44cd; */
+  --theme-light: #fbe9ba; /*opacity 0.4*/
+  --background: #f8f8f8;
   --font-family: 'Roboto', sans-serif;
 }
 

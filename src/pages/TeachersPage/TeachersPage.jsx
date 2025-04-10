@@ -1,5 +1,5 @@
 const TeachersPage = () => {
-  return <div>TeachersPage</div>;
+  return <section>TeachersPage</section>;
 };
 
 export default TeachersPage;

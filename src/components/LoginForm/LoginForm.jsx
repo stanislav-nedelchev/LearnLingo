@@ -1,5 +1,6 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { selectUserDataIsLoading } from '../../redux/auth/authSelector.js';
 import { apiLoginUser } from '../../redux/auth/authOperations.js';
@@ -10,6 +11,7 @@ import css from './LoginForm.module.css';
 
 const RegistrationForm = ({ onClose }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const isLoading = useSelector(selectUserDataIsLoading);
 
   const [formData, setFormData] = useState({
@@ -24,6 +26,7 @@ const RegistrationForm = ({ onClose }) => {
       .unwrap()
       .then(() => {
         onClose();
+        navigate('/teachers');
         toast.success('Authorization was successful');
       })
       .catch(error => {
