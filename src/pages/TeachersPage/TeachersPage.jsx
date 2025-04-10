@@ -1,5 +1,15 @@
+import { useEffect } from 'react';
+import css from './TeachersPage.module.css';
+import { fetchTeachers } from '../../redux/teachers/operations.js';
+import { useDispatch } from 'react-redux';
+
 const TeachersPage = () => {
-  return <section>TeachersPage</section>;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchTeachers());
+  }, [dispatch]);
+
+  return <section className={css.section}>TEACHERS PAGE</section>;
 };
 
 export default TeachersPage;
