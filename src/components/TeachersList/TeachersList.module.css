@@ -1,0 +1,25 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 32px;
+  margin-bottom: 64px;
+}
+
+.loadMoreBtn {
+  display: block;
+  margin: 0 auto;
+  border-radius: 12px;
+  padding: 16px 48px;
+  width: 183px;
+  height: 60px;
+  background-color: #f4c550;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.55556;
+  transition: all 0.3s ease;
+}
+
+.loadMoreBtn:hover,
+.loadMoreBtn:focus {
+  filter: brightness(1.1);
+}

@@ -1,0 +1,34 @@
+.teacherCard {
+  display: flex;
+  gap: 48px;
+  border-radius: 24px;
+  padding: 24px;
+  width: 100%;
+  /* height: 328px; */
+  background: var(--white);
+}
+
+.fotoBox {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border: 3px solid var(--theme-light);
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  /* background: #fff; */
+}
+
+.foto {
+  border-radius: 50%;
+  width: 96px;
+  height: 96px;
+}
+
+.svgOnline {
+  position: absolute;
+  top: 17px;
+  right: 17px;
+}
