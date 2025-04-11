@@ -1,6 +1,8 @@
 import css from './TeacherCard.module.css';
 
 const TeacherCard = ({ teacher }) => {
+  console.log(teacher);
+
   return (
     <div className={css.teacherCard}>
       <div className={css.fotoBox}>
@@ -18,6 +20,13 @@ const TeacherCard = ({ teacher }) => {
         <p>{teacher.name}</p>
         <p>{teacher.surname}</p>
         <p>{teacher.rating}</p>
+        <p>{teacher.languages.join(', ')}</p>
+        <ul className={css.levels}>
+          {teacher.levels.map((level, index) => (
+            <li key={index}>{level}</li>
+          ))}
+        </ul>
+        <p>{teacher.price_per_hour}$</p>
       </div>
     </div>
   );

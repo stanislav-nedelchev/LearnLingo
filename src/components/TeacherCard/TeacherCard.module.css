@@ -32,3 +32,8 @@
   top: 17px;
   right: 17px;
 }
+
+.levels {
+  display: flex;
+  gap: 20px;
+}

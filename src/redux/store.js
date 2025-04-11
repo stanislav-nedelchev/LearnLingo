@@ -17,6 +17,7 @@ import storage from 'redux-persist/lib/storage';
 // import { shopReducer } from './shop/shopSlice';
 import { authReducer } from './auth/authSlice.js';
 import { teachersReducer } from './teachers/slice.js';
+import { filtersReducer } from './filters/slice.js';
 // import { contactsReducer } from './phonebook/contactsSlice';
 
 // const usersConfig = {
@@ -37,6 +38,7 @@ export const store = configureStore({
     // shop: shopReducer,
     auth: persistReducer(authConfig, authReducer),
     teachers: teachersReducer,
+    filters: filtersReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
