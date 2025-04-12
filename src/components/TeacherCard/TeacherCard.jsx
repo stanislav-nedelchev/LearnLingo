@@ -1,7 +1,8 @@
+import React from 'react';
 import css from './TeacherCard.module.css';
 
-const TeacherCard = ({ teacher }) => {
-  console.log(teacher);
+const TeacherCard = React.memo(({ teacher }) => {
+  console.log(teacher.name, teacher.surname);
 
   return (
     <div className={css.teacherCard}>
@@ -30,6 +31,8 @@ const TeacherCard = ({ teacher }) => {
       </div>
     </div>
   );
-};
+});
+
+TeacherCard.displayName = 'TeacherCard';
 
 export default TeacherCard;

@@ -2,14 +2,17 @@ import { useState } from 'react';
 import css from './Filters.module.css';
 import Select from 'react-select';
 import { firstFilterStyles, getLanguagesOptions } from '../../utils/filters.js';
+import { useDispatch } from 'react-redux';
+import { fetchTeachersWithFilters } from '../../redux/teachers/operations.js';
 
 const FilterNew = () => {
+  const dispatch = useDispatch();
   const languagesOptions = getLanguagesOptions();
   const [isOpenLanguages, setIsOpenLanguages] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState(null);
 
   const handleSearch = async () => {
-    console.log({ selectedLanguage });
+    dispatch(fetchTeachersWithFilters(selectedLanguage.value));
   };
 
   return (
