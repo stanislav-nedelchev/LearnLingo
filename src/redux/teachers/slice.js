@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchTeachers } from './operations';
+import { fetchTeachers, fetchTeachersWithFilters } from './operations';
 
 const initialState = {
   teachers: [],
@@ -7,6 +7,7 @@ const initialState = {
   //   totalPages: null,
   //   page: null,
   //   favouritesTeachers: [],
+  lastKey: null,
   error: null,
   loading: false,
 };
@@ -23,12 +24,24 @@ const teachersSlice = createSlice({
       .addCase(fetchTeachers.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.totalTeachers = action.payload.totalTeachers;
-        state.totalPages = action.payload.totalPages;
-        state.page = Number(action.payload.page);
-        state.teachers = action.payload;
+        state.teachers = action.payload.teachers;
+        // state.teachers = [...state.teachers, ...action.payload.teachers];
+        state.lastKey = action.payload.lastKey;
       })
       .addCase(fetchTeachers.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(fetchTeachersWithFilters.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchTeachersWithFilters.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.teachers = action.payload;
+      })
+      .addCase(fetchTeachersWithFilters.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

@@ -1,4 +1,5 @@
 export const selectTeachers = state => state.teachers.teachers;
+export const selectTeachersLastKey = state => state.teachers.lastKey;
 export const selectTeachersLoading = state => state.teachers.loading;
 export const selectTeachersError = state => state.teachers.error;
 // export const selectTotalTeachers = state => state.teachers.totalTeachers;
