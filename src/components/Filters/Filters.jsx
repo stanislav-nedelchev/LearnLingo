@@ -30,9 +30,12 @@ const Filters = ({
   const levelOptionsWithAll = [allOption, ...levelsOptions];
   const priceOptionsWithAll = [allOption, ...priceOptions];
 
+  const formatPriceOptionLabel = (option, { context }) =>
+    context === 'value' ? `To $${option.label}` : option.label;
+
   return (
     <div className={css.formWrapper}>
-      <div className="w-1/4">
+      <div>
         <label className={css.label}>Language</label>
         <Select
           options={languageOptionsWithAll}
@@ -51,7 +54,7 @@ const Filters = ({
         />
       </div>
 
-      <div className="w-1/4">
+      <div>
         <label className={css.label}>Level of knowledge</label>
         <Select
           options={levelOptionsWithAll}
@@ -70,7 +73,7 @@ const Filters = ({
         />
       </div>
 
-      <div className="w-1/4">
+      <div>
         <label className={css.label}>Price</label>
         <Select
           options={priceOptionsWithAll}
@@ -86,6 +89,7 @@ const Filters = ({
           onMenuClose={() => setIsOpenPrice(false)}
           placeholder="All"
           styles={secondFilterStyles(isOpenPrice)}
+          formatOptionLabel={formatPriceOptionLabel}
         />
       </div>
     </div>

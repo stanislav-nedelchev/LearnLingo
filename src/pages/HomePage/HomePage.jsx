@@ -25,7 +25,7 @@ const HomePage = () => {
           </button>
         </div>
         <div className={css.heroRightPart}>
-          <img src="/heroImg.png" alt="Hero image" />
+          <img src="/images/heroImg.png" alt="Hero image" />
         </div>
       </div>
       <div className={css.heroInfo}>
