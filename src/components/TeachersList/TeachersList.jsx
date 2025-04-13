@@ -1,42 +1,42 @@
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  selectTeachers,
-  selectTeachersLastKey,
-  selectTeachersTotalCount,
-} from '../../redux/teachers/selectors.js';
+import { useState, useEffect } from 'react';
 import TeacherCard from '../TeacherCard/TeacherCard.jsx';
 import css from './TeachersList.module.css';
-import { fetchTeachers } from '../../redux/teachers/operations.js';
 
-const TeachersList = () => {
-  const dispatch = useDispatch();
-  const teachers = useSelector(selectTeachers);
-  const lastKey = useSelector(selectTeachersLastKey);
-  const totalCount = useSelector(selectTeachersTotalCount);
-  console.log(totalCount);
+const TeachersList = ({ teachers }) => {
+  const [visibleCount, setVisibleCount] = useState(4);
 
-  const handleLoadMore = async () => {
-    if (lastKey) {
-      dispatch(fetchTeachers(lastKey));
-    }
+  useEffect(() => {
+    setVisibleCount(4);
+  }, [teachers]);
+
+  const handleLoadMore = () => {
+    setVisibleCount(prevCount => prevCount + 4);
   };
+
+  const visibleTeachers = teachers?.slice(0, visibleCount);
 
   return (
     <>
-      <ul className={css.list}>
-        {teachers.length > 0
-          ? teachers.map(teacher => (
+      {teachers.length === 0 ? (
+        <p className={css.emptyMessage}>
+          No teachers found for selected filters.
+        </p>
+      ) : (
+        <>
+          <ul className={css.list}>
+            {visibleTeachers.map(teacher => (
               <li key={teacher.id}>
                 <TeacherCard teacher={teacher} />
               </li>
-            ))
-          : null}
-      </ul>
+            ))}
+          </ul>
 
-      {teachers.length < totalCount && (
-        <button onClick={handleLoadMore} className={css.loadMoreBtn}>
-          Load more
-        </button>
+          {visibleCount < teachers.length && (
+            <button onClick={handleLoadMore} className={css.loadMoreBtn}>
+              Load more
+            </button>
+          )}
+        </>
       )}
     </>
   );
