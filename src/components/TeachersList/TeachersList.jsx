@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import TeacherCard from '../TeacherCard/TeacherCard.jsx';
 import css from './TeachersList.module.css';
 
-const TeachersList = ({ teachers }) => {
+const TeachersList = ({ teachers, selectedLevel }) => {
   const [visibleCount, setVisibleCount] = useState(4);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const TeachersList = ({ teachers }) => {
           <ul className={css.list}>
             {visibleTeachers.map(teacher => (
               <li key={teacher.id}>
-                <TeacherCard teacher={teacher} />
+                <TeacherCard teacher={teacher} selectedLevel={selectedLevel} />
               </li>
             ))}
           </ul>

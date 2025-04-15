@@ -4,7 +4,6 @@
   border-radius: 24px;
   padding: 24px;
   width: 100%;
-  /* height: 328px; */
   background: var(--white);
 }
 
@@ -18,7 +17,6 @@
   border-radius: 50%;
   width: 120px;
   height: 120px;
-  /* background: #fff; */
 }
 
 .foto {
@@ -33,7 +31,93 @@
   right: 17px;
 }
 
-.levels {
+.teacherInfo {
+  position: relative;
+  width: 100%;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.infoLine {
+  position: absolute;
+  top: 0;
+  right: 90px;
   display: flex;
-  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.infoLineSvg {
+  margin-right: 8px;
+}
+
+.svgLine {
+  margin: 0 16px;
+  stroke-width: 1px;
+  stroke: rgba(18, 20, 23, 0.2);
+}
+
+.infoLineSpan {
+  color: var(--green);
+}
+
+.favoriteBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  padding: 0;
+}
+
+.favoriteBtn:hover,
+.favoriteBtn:focus {
+  filter: brightness(1.1);
+}
+
+.svgNormal {
+  fill: transparent;
+  stroke: var(--main);
+}
+
+.svgFavorite {
+  fill: var(--theme);
+  stroke: var(--theme);
+}
+
+.svgNormal,
+.svgFavorite {
+  transition: fill 0.3s ease, stroke 0.3s ease;
+}
+
+.textLang {
+  color: var(--main-light);
+  margin-bottom: 8px;
+}
+
+.teacherName {
+  font-size: 24px;
+  line-height: 1;
+  margin-bottom: 32px;
+}
+
+.teacherShortInfo {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  margin-bottom: 16px;
+}
+
+.teacherSpan {
+  color: var(--main-light);
+}
+
+.teacherLanguages {
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
 }

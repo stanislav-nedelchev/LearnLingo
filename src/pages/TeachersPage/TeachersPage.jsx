@@ -37,6 +37,7 @@ const TeachersPage = () => {
 
   return (
     <section className={css.section}>
+      <h2 className="visually-hidden">Teachers</h2>
       <Filters
         selectedLanguage={selectedLanguage}
         setSelectedLanguage={setSelectedLanguage}
@@ -45,7 +46,7 @@ const TeachersPage = () => {
         selectedPrice={selectedPrice}
         setSelectedPrice={setSelectedPrice}
       />
-      <TeachersList teachers={filteredTeachers} />
+      <TeachersList teachers={filteredTeachers} selectedLevel={selectedLevel} />
     </section>
   );
 };

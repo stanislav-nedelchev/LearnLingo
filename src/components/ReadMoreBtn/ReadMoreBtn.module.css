@@ -1,0 +1,91 @@
+.readMoreInfo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  row-gap: 32px;
+}
+
+.reviewsList {
+  display: flex;
+  flex-direction: column;
+  row-gap: 32px;
+}
+.reviewerInfo {
+  display: flex;
+  align-items: center;
+  column-gap: 12px;
+  margin-bottom: 16px;
+}
+
+.reviewerPhoto {
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+}
+
+.name {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--main-light);
+  margin-bottom: 4px;
+}
+
+.rating {
+  display: flex;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.29;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+}
+
+.text {
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.bookingFormBtn {
+  border-radius: 12px;
+  padding: 16px 48px;
+  width: 232px;
+  height: 60px;
+  background-color: var(--theme);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.55556;
+  transition: all 0.3s ease;
+}
+
+.bookingFormBtn:hover,
+.bookingFormBtn:focus {
+  filter: brightness(1.1);
+}
+
+.showLessBtn {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  padding: 0;
+  background-color: transparent;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.readMoreBtn {
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  margin-bottom: 32px;
+  padding: 0;
+  background-color: transparent;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+}
