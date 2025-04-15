@@ -62,7 +62,10 @@ const ReadMoreBtn = ({ teacher, activeLevel, setIsReadMoreExpanded }) => {
             isOpen={isBookingFormModalOpen}
             onClose={() => setIsBookingFormModalOpen(false)}
           >
-            <BookingForm onClose={() => setIsBookingFormModalOpen(false)} />
+            <BookingForm
+              onClose={() => setIsBookingFormModalOpen(false)}
+              teacher={teacher}
+            />
           </Modal>
           <button onClick={toggleReadMore} className={css.showLessBtn}>
             Show less

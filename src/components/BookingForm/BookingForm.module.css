@@ -1,8 +1,194 @@
 .formBox {
   position: relative;
-  height: 600px;
   width: 566px;
+  max-height: calc(100vh - 60px);
+  overflow-y: auto;
   border-radius: 30px;
   padding: 64px;
   background-color: var(--white);
+}
+
+.modalCloseButton {
+  position: absolute;
+  border: none;
+  outline: none;
+  top: 20px;
+  right: 20px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.modalCloseButton:hover,
+.modalCloseButton:focus {
+  filter: brightness(1.1);
+  outline: 1px solid var(--theme);
+  border-radius: 50%;
+}
+
+.svgClose {
+  stroke: var(--theme);
+}
+
+.formTitle {
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+
+.formText {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.375;
+  margin-bottom: 20px;
+}
+
+.teacherInfo {
+  display: flex;
+  align-items: center;
+  column-gap: 14px;
+  margin-bottom: 40px;
+}
+
+.teacherPhoto {
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+}
+
+.yourTeacher {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33333;
+  color: var(--main-light);
+}
+
+.teacherName {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.radioGroup {
+  margin-bottom: 40px;
+}
+
+.radioGroupLabel {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.33333;
+  margin-bottom: 20px;
+}
+
+.radioLabelBox {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
+
+.label {
+  position: relative;
+  display: block;
+  margin-bottom: 18px;
+}
+
+.input {
+  border: 1px solid var(--main);
+  border-radius: 12px;
+  padding: 16px 18px;
+  width: 100%;
+  height: 54px;
+}
+
+.errorMessageRadio {
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  color: red;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.errorMessage {
+  position: absolute;
+  top: 56px;
+  left: 0;
+  color: red;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.formBtn {
+  margin-top: 22px;
+  border-radius: 12px;
+  padding: 16px 0;
+  width: 100%;
+  height: 60px;
+  background-color: var(--theme);
+  transition: all 0.3s ease;
+}
+
+.formBtn:hover,
+.formBtn:focus {
+  filter: brightness(1.1);
+}
+
+.radioInput {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.radioLabel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: 34px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.375;
+}
+
+.customRadio {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 24px;
+  width: 24px;
+  background-color: #fff;
+  border: 2px solid var(--main-light); /* светло-серый */
+  border-radius: 50%;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.customRadio::after {
+  content: '';
+  position: absolute;
+  display: none;
+  left: 6px;
+  top: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--theme);
+}
+
+.radioInput:checked + .customRadio {
+  border-color: var(--theme);
+}
+
+.radioInput:checked + .customRadio::after {
+  display: block;
+}
+
+.radioLabel:hover .customRadio {
+  border-color: var(--theme);
 }
