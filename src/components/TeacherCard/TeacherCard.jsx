@@ -1,17 +1,30 @@
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import ReadMoreBtn from '../ReadMoreBtn/ReadMoreBtn.jsx';
 import LevelsList from '../LevelsList/LevelsList.jsx';
-import css from './TeacherCard.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFavorites } from '../../redux/favorites/selectors.js';
 import { addFavorite, removeFavorite } from '../../redux/favorites/slice.js';
+import {
+  selectUserData,
+  selectUserDataIsLoggedIn,
+} from '../../redux/auth/authSelector.js';
+import {
+  addTeacherToFavorites,
+  removeTeacherFromFavorites,
+} from '../../redux/favorites/operations.js';
+import css from './TeacherCard.module.css';
 
 const TeacherCard = React.memo(({ teacher, selectedLevel }) => {
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector(selectUserDataIsLoggedIn);
   const favorites = useSelector(selectFavorites) || [];
   const isFavorited = favorites.includes(teacher.id);
   const activeLevel = selectedLevel?.label || 'A1 Beginner';
   const [isReadMoreExpanded, setIsReadMoreExpanded] = useState(false);
+
+  const user = useSelector(selectUserData);
+  const userId = user.id;
 
   const SvgLine = () => (
     <svg width="2" height="16" className={css.svgLine}>
@@ -19,11 +32,25 @@ const TeacherCard = React.memo(({ teacher, selectedLevel }) => {
     </svg>
   );
 
-  const handleFavoriteTeacher = () => {
-    if (isFavorited) {
-      dispatch(removeFavorite(teacher.id));
-    } else {
-      dispatch(addFavorite(teacher.id));
+  const handleFavoriteTeacher = async () => {
+    if (!isLoggedIn) {
+      toast.error('This feature is available for authenticated users only.');
+      return;
+    }
+
+    try {
+      if (isFavorited) {
+        await removeTeacherFromFavorites(userId, teacher.id);
+        dispatch(removeFavorite(teacher.id));
+        toast.success('Removed from favorites');
+      } else {
+        await addTeacherToFavorites(userId, teacher.id);
+        dispatch(addFavorite(teacher.id));
+        toast.success('Added to favorites');
+      }
+    } catch (error) {
+      toast.error('Something went wrong');
+      console.error(error);
     }
   };
 

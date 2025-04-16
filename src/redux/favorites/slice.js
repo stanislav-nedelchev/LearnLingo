@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { fetchFavorites } from './operations.js';
 
 const initialState = {
   favorites: [],
@@ -16,6 +17,11 @@ const favoritesSlice = createSlice({
     removeFavorite: (state, action) => {
       state.favorites = state.favorites.filter(id => id !== action.payload);
     },
+  },
+  extraReducers: builder => {
+    builder.addCase(fetchFavorites.fulfilled, (state, action) => {
+      state.favorites = action.payload;
+    });
   },
 });
 

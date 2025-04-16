@@ -5,6 +5,8 @@ import { selectTeachers } from '../../redux/teachers/selectors.js';
 import TeachersList from '../../components/TeachersList/TeachersList.jsx';
 import Filters from '../../components/Filters/Filters.jsx';
 import css from './TeachersPage.module.css';
+import { fetchFavorites } from '../../redux/favorites/operations.js';
+import { selectUserData } from '../../redux/auth/authSelector.js';
 
 const TeachersPage = () => {
   const dispatch = useDispatch();
@@ -16,9 +18,12 @@ const TeachersPage = () => {
 
   const [filteredTeachers, setFilteredTeachers] = useState([]);
 
+  const userData = useSelector(selectUserData);
+
   useEffect(() => {
     dispatch(fetchTeachers());
-  }, [dispatch]);
+    dispatch(fetchFavorites(userData));
+  }, [dispatch, userData]);
 
   useEffect(() => {
     const filtered = teachers.filter(teacher => {

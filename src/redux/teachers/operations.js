@@ -6,7 +6,7 @@ export const fetchTeachers = createAsyncThunk(
   'teachers/fetchTeachers',
   async (_, { rejectWithValue }) => {
     try {
-      const dbRef = ref(db);
+      const dbRef = ref(db, 'teachers/');
       const dataQuery = query(dbRef, orderByKey());
       const snapshot = await get(dataQuery);
 

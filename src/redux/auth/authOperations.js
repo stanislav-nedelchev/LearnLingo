@@ -7,22 +7,7 @@ import {
   updateProfile,
 } from 'firebase/auth';
 import { auth } from '../../api/firebaseConfig.js';
-import axios from 'axios';
-
-export const authInstance = axios.create({
-  baseURL: 'https://connections-api.goit.global/',
-  // headers: {
-  //     "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
-  // }
-});
-
-export const setToken = token => {
-  authInstance.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
-
-export const clearToken = () => {
-  authInstance.defaults.headers.common.Authorization = '';
-};
+// import { ref, set } from 'firebase/database';
 
 export const apiRegisterUser = createAsyncThunk(
   'auth/registerUser',
@@ -37,6 +22,11 @@ export const apiRegisterUser = createAsyncThunk(
       await updateProfile(userCredential.user, {
         displayName: name,
       });
+
+      // const userRef = ref(db, 'users/' + userCredential.user.uid);
+      // await set(userRef, {
+      //   favorites: [],
+      // });
 
       return {
         user: {

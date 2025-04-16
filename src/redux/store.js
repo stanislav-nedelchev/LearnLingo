@@ -20,16 +20,11 @@ const authConfig = {
   whitelist: ['token'],
 };
 
-const favoritesPersistConfig = {
-  key: 'favorites',
-  storage,
-};
-
 export const store = configureStore({
   reducer: {
     auth: persistReducer(authConfig, authReducer),
     teachers: teachersReducer,
-    favorites: persistReducer(favoritesPersistConfig, favoritesReducer),
+    favorites: favoritesReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

@@ -1,0 +1,7 @@
+.section {
+  max-width: 1440px;
+  padding: 96px 128px;
+  margin: auto;
+  background-color: var(--background);
+  min-height: calc(100vh - 88px);
+}
