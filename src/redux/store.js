@@ -1,5 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit';
-
 import {
   persistStore,
   persistReducer,
@@ -11,32 +10,26 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-
-// import { usersReducer } from './users/usersReducer';
-// import { filterReducer } from './filter/filterReducer';
-// import { shopReducer } from './shop/shopSlice';
 import { authReducer } from './auth/authSlice.js';
 import { teachersReducer } from './teachers/slice.js';
-// import { contactsReducer } from './phonebook/contactsSlice';
+import { favoritesReducer } from './favorites/slice.js';
 
-// const usersConfig = {
-//   key: 'usersKey',
-//   storage,
-//   //   whitelist: ["users"], // blacklist: ["showProfilesList"]
-// };
 const authConfig = {
   key: 'auth',
   storage,
   whitelist: ['token'],
 };
 
+const favoritesPersistConfig = {
+  key: 'favorites',
+  storage,
+};
+
 export const store = configureStore({
   reducer: {
-    // usersData: persistReducer(usersConfig, usersReducer),
-    // filter: filterReducer,
-    // shop: shopReducer,
     auth: persistReducer(authConfig, authReducer),
     teachers: teachersReducer,
+    favorites: persistReducer(favoritesPersistConfig, favoritesReducer),
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

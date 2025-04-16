@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import ReadMoreBtn from '../ReadMoreBtn/ReadMoreBtn.jsx';
 import LevelsList from '../LevelsList/LevelsList.jsx';
 import css from './TeacherCard.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectFavorites } from '../../redux/favorites/selectors.js';
+import { addFavorite, removeFavorite } from '../../redux/favorites/slice.js';
 
 const TeacherCard = React.memo(({ teacher, selectedLevel }) => {
-  console.log(teacher);
-  console.log(selectedLevel?.label);
-
+  const dispatch = useDispatch();
+  const favorites = useSelector(selectFavorites) || [];
+  const isFavorited = favorites.includes(teacher.id);
   const activeLevel = selectedLevel?.label || 'A1 Beginner';
   const [isReadMoreExpanded, setIsReadMoreExpanded] = useState(false);
 
@@ -16,20 +19,11 @@ const TeacherCard = React.memo(({ teacher, selectedLevel }) => {
     </svg>
   );
 
-  const [isFavorited, setIsFavorited] = useState([false]);
-
   const handleFavoriteTeacher = () => {
-    // if (isFavorited) {
-    //   dispatch(removeFavorite(car.id));
-    // } else {
-    //   dispatch(addFavorite(car.id));
-    // }
     if (isFavorited) {
-      setIsFavorited(false);
-      console.log(false);
+      dispatch(removeFavorite(teacher.id));
     } else {
-      setIsFavorited(true);
-      console.log(true);
+      dispatch(addFavorite(teacher.id));
     }
   };
 
