@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUserData } from '../../redux/auth/authSelector.js';
 import { apiLogoutUser } from '../../redux/auth/authOperations.js';
+import { clearFavorites } from '../../redux/favorites/slice.js';
 import RegistrationForm from '../RegistrationForm/RegistrationForm.jsx';
 import LoginForm from '../LoginForm/LoginForm.jsx';
 import Modal from '../Modal/Modal.jsx';
@@ -15,7 +16,7 @@ const BtnAuth = ({ isLoggedIn }) => {
 
   const handleLogout = () => {
     dispatch(apiLogoutUser());
-    // dispatch(clearFavorites());
+    dispatch(clearFavorites());
   };
 
   return (

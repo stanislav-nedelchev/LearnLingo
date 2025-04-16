@@ -24,7 +24,7 @@ const TeacherCard = React.memo(({ teacher, selectedLevel }) => {
   const [isReadMoreExpanded, setIsReadMoreExpanded] = useState(false);
 
   const user = useSelector(selectUserData);
-  const userId = user.id;
+  const userId = user?.id;
 
   const SvgLine = () => (
     <svg width="2" height="16" className={css.svgLine}>
