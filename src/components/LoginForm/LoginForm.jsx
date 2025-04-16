@@ -1,7 +1,6 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 import { selectUserDataIsLoading } from '../../redux/auth/authSelector.js';
 import { apiLoginUser } from '../../redux/auth/authOperations.js';
 import { LoginUserSchema } from '../../utils/schemas.js';
@@ -9,19 +8,12 @@ import Loader from '../Loader/Loader.jsx';
 import toast from 'react-hot-toast';
 import css from './LoginForm.module.css';
 
-const RegistrationForm = ({ onClose }) => {
+const LoginForm = ({ onClose }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLoading = useSelector(selectUserDataIsLoading);
 
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
-
   const handleSubmit = values => {
-    setFormData(values);
-
     dispatch(apiLoginUser(values))
       .unwrap()
       .then(() => {
@@ -59,7 +51,7 @@ const RegistrationForm = ({ onClose }) => {
             and continue your search for an teacher.
           </p>
           <Formik
-            initialValues={formData}
+            initialValues={{ email: '', password: '' }}
             validationSchema={LoginUserSchema}
             onSubmit={handleSubmit}
           >
@@ -67,10 +59,11 @@ const RegistrationForm = ({ onClose }) => {
               <Form>
                 <label className={css.label}>
                   <Field
-                    type="text"
+                    type="email"
                     name="email"
                     className={css.input}
                     placeholder="Email"
+                    autoComplete="email"
                     value={values.email}
                     onChange={handleChange}
                   />
@@ -86,6 +79,7 @@ const RegistrationForm = ({ onClose }) => {
                     name="password"
                     className={css.input}
                     placeholder="Password"
+                    autoComplete="current-password"
                     value={values.password}
                     onChange={handleChange}
                   />
@@ -112,4 +106,4 @@ const RegistrationForm = ({ onClose }) => {
   );
 };
 
-export default RegistrationForm;
+export default LoginForm;

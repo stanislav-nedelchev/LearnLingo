@@ -1,7 +1,6 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 import { selectUserDataIsLoading } from '../../redux/auth/authSelector.js';
 import { apiRegisterUser } from '../../redux/auth/authOperations.js';
 import { RegisterUserSchema } from '../../utils/schemas.js';
@@ -14,15 +13,7 @@ const RegistrationForm = ({ onClose }) => {
   const navigate = useNavigate();
   const isLoading = useSelector(selectUserDataIsLoading);
 
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
-
   const handleSubmit = values => {
-    setFormData(values);
-
     dispatch(apiRegisterUser(values))
       .unwrap()
       .then(() => {
@@ -58,14 +49,18 @@ const RegistrationForm = ({ onClose }) => {
           <p className={css.formText}>
             Thank you for your interest in our platform! In order to register,
             we need some information. Please provide us with the following
-            information
+            information.
           </p>
           <Formik
-            initialValues={formData}
+            initialValues={{
+              name: '',
+              email: '',
+              password: '',
+            }}
             validationSchema={RegisterUserSchema}
             onSubmit={handleSubmit}
           >
-            {({ values, handleChange }) => (
+            {({ values, handleChange, isValid, dirty }) => (
               <Form className={css.form}>
                 <label className={css.label}>
                   <Field
@@ -75,6 +70,7 @@ const RegistrationForm = ({ onClose }) => {
                     placeholder="Name"
                     value={values.name}
                     onChange={handleChange}
+                    autoComplete="name"
                   />
                   <ErrorMessage
                     className={css.errorMessage}
@@ -84,12 +80,13 @@ const RegistrationForm = ({ onClose }) => {
                 </label>
                 <label className={css.label}>
                   <Field
-                    type="text"
+                    type="email"
                     name="email"
                     className={css.input}
                     placeholder="Email"
                     value={values.email}
                     onChange={handleChange}
+                    autoComplete="email"
                   />
                   <ErrorMessage
                     className={css.errorMessage}
@@ -105,6 +102,7 @@ const RegistrationForm = ({ onClose }) => {
                     placeholder="Password"
                     value={values.password}
                     onChange={handleChange}
+                    autoComplete="new-password"
                   />
                   <ErrorMessage
                     className={css.errorMessage}
@@ -116,7 +114,7 @@ const RegistrationForm = ({ onClose }) => {
                 <button
                   type="submit"
                   className={css.formBtn}
-                  disabled={isLoading}
+                  disabled={isLoading || !isValid || !dirty}
                 >
                   Sign Up
                 </button>

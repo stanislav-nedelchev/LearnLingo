@@ -1,18 +1,9 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import { useState } from 'react';
 import { BookingFormSchema } from '../../utils/schemas.js';
 import toast from 'react-hot-toast';
 import css from './BookingForm.module.css';
 
 const BookingForm = ({ onClose, teacher }) => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    reason: '',
-    teacher: '',
-  });
-
   const teacherFullName = `${teacher.name} ${teacher.surname}`;
 
   const handleSubmit = (values, { resetForm }) => {
@@ -20,7 +11,6 @@ const BookingForm = ({ onClose, teacher }) => {
       ...values,
       teacher: teacherFullName,
     };
-    setFormData(updatedData);
     console.log(updatedData);
     toast.success('Your booking request has been confirmed.');
     resetForm();
@@ -60,7 +50,13 @@ const BookingForm = ({ onClose, teacher }) => {
       </div>
 
       <Formik
-        initialValues={formData}
+        initialValues={{
+          name: '',
+          email: '',
+          phone: '',
+          reason: '',
+          teacher: teacherFullName, // Automatically set the teacher name
+        }}
         validationSchema={BookingFormSchema}
         onSubmit={handleSubmit}
       >
@@ -105,6 +101,7 @@ const BookingForm = ({ onClose, teacher }) => {
                 placeholder="Full Name"
                 value={values.name}
                 onChange={handleChange}
+                autoComplete="name"
               />
               <ErrorMessage
                 className={css.errorMessage}
@@ -115,12 +112,13 @@ const BookingForm = ({ onClose, teacher }) => {
 
             <label className={css.label}>
               <Field
-                type="text"
+                type="email"
                 name="email"
                 className={css.input}
                 placeholder="Email"
                 value={values.email}
                 onChange={handleChange}
+                autoComplete="email"
               />
               <ErrorMessage
                 className={css.errorMessage}
@@ -131,12 +129,13 @@ const BookingForm = ({ onClose, teacher }) => {
 
             <label className={css.label}>
               <Field
-                type="text"
+                type="tel"
                 name="phone"
                 className={css.input}
                 placeholder="Phone number"
                 value={values.phone}
                 onChange={handleChange}
+                autoComplete="tel"
               />
               <ErrorMessage
                 className={css.errorMessage}
