@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import HeroImg from '../../components/HeroImg/HeroImg.jsx';
 import css from './HomePage.module.css';
 
 const HomePage = () => {
@@ -24,9 +25,7 @@ const HomePage = () => {
             Get started
           </button>
         </div>
-        <div className={css.heroRightPart}>
-          <img src="/images/heroImg.png" alt="Hero image" />
-        </div>
+        <HeroImg />
       </div>
       <div className={css.heroInfo}>
         <svg className={css.svgRectangle}>

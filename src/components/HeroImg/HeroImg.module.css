@@ -1,0 +1,29 @@
+.HeroImg {
+  position: relative;
+  border-radius: 30px;
+  width: 568px;
+  height: 530px;
+  background-color: var(--theme-light);
+}
+
+.heroBoyImg {
+  width: 339px;
+  height: 339px;
+  margin: 80px auto auto;
+}
+
+.HeroIMac {
+  position: absolute;
+  width: 362px;
+  height: 176px;
+  border-radius: 8px 8px 0 0;
+  background-color: var(--theme);
+  left: 104px;
+  bottom: 0;
+}
+
+.svgApple {
+  display: block;
+  margin: 65px auto auto;
+  fill: var(--theme-light);
+}
