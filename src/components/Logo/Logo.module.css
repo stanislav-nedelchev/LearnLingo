@@ -1,10 +1,14 @@
 .logo {
+  position: absolute;
+  left: 0%;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-logoTitle {
+.logoTitle {
   font-family: var(--font-family);
   font-weight: 500;
   font-size: 20px;

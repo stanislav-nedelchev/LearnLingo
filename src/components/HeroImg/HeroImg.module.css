@@ -1,4 +1,4 @@
-.HeroImg {
+.heroImg {
   position: relative;
   border-radius: 30px;
   width: 568px;
@@ -12,7 +12,7 @@
   margin: 80px auto auto;
 }
 
-.HeroIMac {
+.heroIMac {
   position: absolute;
   width: 362px;
   height: 176px;
@@ -25,5 +25,5 @@
 .svgApple {
   display: block;
   margin: 65px auto auto;
-  fill: var(--theme-light);
+  fill: rgba(255, 255, 255, 0.4);
 }

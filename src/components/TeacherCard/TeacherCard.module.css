@@ -82,7 +82,7 @@
 
 .svgNormal {
   fill: transparent;
-  stroke: var(--main);
+  stroke: var(--theme);
 }
 
 .svgFavorite {

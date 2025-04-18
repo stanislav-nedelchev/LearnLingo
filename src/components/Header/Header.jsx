@@ -4,6 +4,7 @@ import Logo from '../Logo/Logo.jsx';
 import css from './Header.module.css';
 import { useSelector } from 'react-redux';
 import { selectUserDataIsLoggedIn } from '../../redux/auth/authSelector.js';
+import RandomThemeButton from '../RandomThemeButton/RandomThemeButton.jsx';
 
 export default function Header() {
   const isLoggedIn = useSelector(selectUserDataIsLoggedIn);
@@ -12,6 +13,7 @@ export default function Header() {
     <header className={css.header}>
       <Logo />
       <Navigation isLoggedIn={isLoggedIn} />
+      <RandomThemeButton />
       <BtnAuth isLoggedIn={isLoggedIn} />
     </header>
   );

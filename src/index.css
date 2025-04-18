@@ -43,9 +43,8 @@
   --main: #121417;
   --main-light: #8a8a89;
   --white: #fff;
-  --theme: #f4c550;
-  --theme-light: #fbe9ba; /*opacity 0.4*/
-  --theme-dark:
+  --theme: #15da1a;
+  --theme-light: rgba(21, 218, 26, 0.4);
   --green: #38cd3e;
   --background: #f8f8f8;
   --font-family: 'Roboto', sans-serif;
