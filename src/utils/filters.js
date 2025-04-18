@@ -55,9 +55,6 @@ export const firstFilterStyles = isOpen => {
       marginTop: '8px',
       cursor: 'pointer',
       padding: '0',
-      '&:firstChild': {
-        marginTop: '14',
-      },
       '&:active': {
         fontWeight: '500',
         fontSize: '18px',
@@ -156,9 +153,6 @@ export const secondFilterStyles = isOpen => {
       marginTop: '8px',
       cursor: 'pointer',
       padding: '0',
-      '&:firstChild': {
-        marginTop: '14',
-      },
       '&:active': {
         fontWeight: '500',
         fontSize: '18px',

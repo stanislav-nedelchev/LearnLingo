@@ -7,6 +7,7 @@ import {
   secondFilterStyles,
 } from '../../utils/filters.js';
 import Select from 'react-select';
+import CustomInput from '../CustomInput/CustomInput.jsx';
 import css from './Filters.module.css';
 
 const Filters = ({
@@ -51,6 +52,7 @@ const Filters = ({
           onMenuClose={() => setIsOpenLanguages(false)}
           placeholder="All"
           styles={firstFilterStyles(isOpenLanguages)}
+          components={{ Input: CustomInput }}
         />
       </div>
 
@@ -70,6 +72,7 @@ const Filters = ({
           onMenuClose={() => setIsOpenLevels(false)}
           placeholder="All"
           styles={firstFilterStyles(isOpenLevels)}
+          components={{ Input: CustomInput }}
         />
       </div>
 
@@ -90,6 +93,7 @@ const Filters = ({
           placeholder="All"
           styles={secondFilterStyles(isOpenPrice)}
           formatOptionLabel={formatPriceOptionLabel}
+          components={{ Input: CustomInput }}
         />
       </div>
     </div>

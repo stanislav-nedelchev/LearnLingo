@@ -47,6 +47,10 @@
   margin-bottom: 40px;
 }
 
+.form {
+  position: relative;
+}
+
 .label {
   position: relative;
   display: block;

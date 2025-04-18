@@ -117,11 +117,12 @@ const RegistrationForm = ({ onClose }) => {
                     name="password"
                     component="span"
                   />
-                  <PasswordToggleButton
-                    isVisible={showPassword}
-                    onClick={() => setShowPassword(prev => !prev)}
-                  />
                 </label>
+
+                <PasswordToggleButton
+                  isVisible={showPassword}
+                  onClick={() => setShowPassword(prev => !prev)}
+                />
 
                 <button
                   type="submit"

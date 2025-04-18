@@ -64,7 +64,7 @@ const LoginForm = ({ onClose }) => {
             }}
           >
             {({ values, handleChange }) => (
-              <Form>
+              <Form className={css.form}>
                 <label className={css.label}>
                   <Field
                     type="email"
@@ -96,11 +96,12 @@ const LoginForm = ({ onClose }) => {
                     name="password"
                     component="span"
                   />
-                  <PasswordToggleButton
-                    isVisible={showPassword}
-                    onClick={() => setShowPassword(prev => !prev)}
-                  />
                 </label>
+
+                <PasswordToggleButton
+                  isVisible={showPassword}
+                  onClick={() => setShowPassword(prev => !prev)}
+                />
 
                 <button
                   type="submit"
