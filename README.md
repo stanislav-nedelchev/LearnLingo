@@ -2,7 +2,7 @@
 
 ## Link to the live page
 
-learn-lingo-rho-bice.vercel.app
+[https://learn-lingo-rho-bice.vercel.app/](https://learn-lingo-rho-bice.vercel.app/)
 
 ## Project Description
 
