@@ -1,9 +1,11 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { selectUserDataIsLoading } from '../../redux/auth/authSelector.js';
 import { apiRegisterUser } from '../../redux/auth/authOperations.js';
 import { RegisterUserSchema } from '../../utils/schemas.js';
+import PasswordToggleButton from '../PasswordToggleButton/PasswordToggleButton.jsx';
 import Loader from '../Loader/Loader.jsx';
 import toast from 'react-hot-toast';
 import css from './RegistrationForm.module.css';
@@ -12,6 +14,12 @@ const RegistrationForm = ({ onClose }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLoading = useSelector(selectUserDataIsLoading);
+  const [showPassword, setShowPassword] = useState(false);
+  const [formValues, setFormValues] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
 
   const handleSubmit = values => {
     dispatch(apiRegisterUser(values))
@@ -52,15 +60,15 @@ const RegistrationForm = ({ onClose }) => {
             information.
           </p>
           <Formik
-            initialValues={{
-              name: '',
-              email: '',
-              password: '',
-            }}
+            initialValues={formValues}
             validationSchema={RegisterUserSchema}
-            onSubmit={handleSubmit}
+            onSubmit={(values, { setSubmitting }) => {
+              setFormValues(values);
+              handleSubmit(values);
+              setSubmitting(false);
+            }}
           >
-            {({ values, handleChange, isValid, dirty }) => (
+            {({ values, handleChange }) => (
               <Form className={css.form}>
                 <label className={css.label}>
                   <Field
@@ -96,7 +104,7 @@ const RegistrationForm = ({ onClose }) => {
                 </label>
                 <label className={css.label}>
                   <Field
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     name="password"
                     className={css.input}
                     placeholder="Password"
@@ -109,12 +117,16 @@ const RegistrationForm = ({ onClose }) => {
                     name="password"
                     component="span"
                   />
+                  <PasswordToggleButton
+                    isVisible={showPassword}
+                    onClick={() => setShowPassword(prev => !prev)}
+                  />
                 </label>
 
                 <button
                   type="submit"
                   className={css.formBtn}
-                  disabled={isLoading || !isValid || !dirty}
+                  disabled={isLoading}
                 >
                   Sign Up
                 </button>

@@ -1,9 +1,11 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { selectUserDataIsLoading } from '../../redux/auth/authSelector.js';
 import { apiLoginUser } from '../../redux/auth/authOperations.js';
 import { LoginUserSchema } from '../../utils/schemas.js';
+import PasswordToggleButton from '../PasswordToggleButton/PasswordToggleButton.jsx';
 import Loader from '../Loader/Loader.jsx';
 import toast from 'react-hot-toast';
 import css from './LoginForm.module.css';
@@ -12,6 +14,8 @@ const LoginForm = ({ onClose }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLoading = useSelector(selectUserDataIsLoading);
+  const [showPassword, setShowPassword] = useState(false);
+  const [formValues, setFormValues] = useState({ email: '', password: '' });
 
   const handleSubmit = values => {
     dispatch(apiLoginUser(values))
@@ -51,9 +55,13 @@ const LoginForm = ({ onClose }) => {
             and continue your search for an teacher.
           </p>
           <Formik
-            initialValues={{ email: '', password: '' }}
+            initialValues={formValues}
             validationSchema={LoginUserSchema}
-            onSubmit={handleSubmit}
+            onSubmit={(values, { setSubmitting }) => {
+              setFormValues(values);
+              handleSubmit(values);
+              setSubmitting(false);
+            }}
           >
             {({ values, handleChange }) => (
               <Form>
@@ -75,7 +83,7 @@ const LoginForm = ({ onClose }) => {
                 </label>
                 <label className={css.label}>
                   <Field
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     name="password"
                     className={css.input}
                     placeholder="Password"
@@ -87,6 +95,10 @@ const LoginForm = ({ onClose }) => {
                     className={css.errorMessage}
                     name="password"
                     component="span"
+                  />
+                  <PasswordToggleButton
+                    isVisible={showPassword}
+                    onClick={() => setShowPassword(prev => !prev)}
                   />
                 </label>
 
