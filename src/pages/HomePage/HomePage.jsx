@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import HeroImg from '../../components/HeroImg/HeroImg.jsx';
+// import HeroImg from '../../components/HeroImg/HeroImg.jsx';
 import css from './HomePage.module.css';
 
 const HomePage = () => {
@@ -25,9 +25,9 @@ const HomePage = () => {
             Get started
           </button>
         </div>
-        <HeroImg />
+        {/* <HeroImg /> */}
       </div>
-      <div className={css.heroInfo}>
+      {/* <div className={css.heroInfo}>
         <svg className={css.svgRectangle}>
           <use href="/sprite.svg#rectangle"></use>
         </svg>
@@ -49,7 +49,7 @@ const HomePage = () => {
             <p className={css.infoItemText}>Tutor nationalities</p>
           </li>
         </ul>
-      </div>
+      </div> */}
     </section>
   );
 };

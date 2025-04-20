@@ -1,12 +1,9 @@
 .navigation {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  gap: 28px;
+  gap: 14px;
 }
 
 .link {
@@ -18,4 +15,17 @@
 
 .activeLink {
   color: var(--theme);
+}
+
+@media screen and (min-width: 768px) {
+  .navigation {
+    flex-direction: row;
+    gap: 14px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .navigation {
+    gap: 28px;
+  }
 }
