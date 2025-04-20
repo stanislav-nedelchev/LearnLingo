@@ -1,30 +1,31 @@
 .section {
   max-width: 1440px;
-  padding: 0 24px 10px;
+  padding: 0 24px 24px;
   margin: auto;
 }
 
 .heroMainInfo {
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin-bottom: 24px;
+  gap: 24px;
 }
 
 .heroLeftPart {
   border-radius: 30px;
-  width: 720px;
-  height: 530px;
+  max-width: 720px;
   background-color: var(--background);
-  background-color: teal;
-  padding: 98px 64px;
+  padding: 24px;
+  width: 100%;
 }
 
 .heroTitle {
   font-weight: 500;
-  font-size: 48px;
+  font-size: 24px;
   line-height: 1.16667;
   letter-spacing: -0.02em;
-  margin-bottom: 32px;
+  margin-bottom: 18px;
 }
 
 .heroTitleSpan {
@@ -41,13 +42,13 @@
   line-height: 1.375;
   letter-spacing: -0.02em;
   max-width: 470px;
-  margin-bottom: 64px;
+  margin-bottom: 24px;
 }
 
 .heroBtn {
   border-radius: 12px;
-  padding: 16px 88px;
-  width: 267px;
+  padding: 16px 66px;
+  max-width: 267px;
   height: 60px;
   background-color: var(--theme);
   font-weight: 700;
@@ -66,22 +67,20 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 116px;
 }
 
 .svgRectangle {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  stroke: var(--theme);
+  display: none;
 }
 
 .infoList {
   display: flex;
-  align-items: center;
-  gap: 100px;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 20px;
+  border: 2px dashed var(--theme);
+  border-radius: 30px;
+  padding: 18px;
 }
 
 .infoItem {
@@ -108,28 +107,70 @@
 
 @media screen and (min-width: 768px) {
   .section {
-    max-width: 1440px;
-    padding: 0 64px 20px;
-    margin: auto;
+    padding: 0 64px 32px;
   }
 
+  .heroLeftPart {
+    padding: 64px;
+  }
+
+  .heroTitle {
+    font-size: 48px;
+    margin-bottom: 32px;
+  }
+
+  .heroText {
+    margin-bottom: 64px;
+  }
+
+  .heroBtn {
+    padding: 16px 88px;
+  }
+
+  .heroInfo {
+    height: 150px;
+  }
+
+  .infoList {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    max-width: 568px;
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (min-width: 1280px) {
   .heroMainInfo {
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 24px;
   }
-}
 
-@media screen and (min-width: 1280px) {
-  .section {
-    max-width: 1440px;
-    padding: 0 64px 20px;
-    margin: auto;
+  .heroLeftPart {
+    padding: 98px 64px;
+    height: 530px;
   }
 
-  .heroMainInfo {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 24px;
+  .heroInfo {
+    height: 116px;
+  }
+
+  .infoList {
+    max-width: 100%;
+    gap: 100px;
+    border: none;
+    padding: 0;
+  }
+
+  .svgRectangle {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    stroke: var(--theme);
   }
 }

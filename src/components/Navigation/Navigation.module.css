@@ -10,7 +10,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 1.25;
-  color: var(--main);
+  color: var(--white);
 }
 
 .activeLink {
@@ -21,6 +21,14 @@
   .navigation {
     flex-direction: row;
     gap: 14px;
+  }
+
+  .link {
+    color: var(--main);
+  }
+
+  .activeLink {
+    color: var(--theme);
   }
 }
 

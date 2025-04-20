@@ -9,6 +9,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  color: var(--white);
   font-weight: 700;
   font-size: 16px;
   line-height: 1.25;
@@ -33,7 +34,7 @@
   border: 1px solid transparent;
   padding: 14px 39px;
   height: 48px;
-  background-color: var(--main);
+  background-color: var(--theme);
   font-weight: 700;
   font-size: 16px;
   line-height: 1.25;
@@ -64,6 +65,22 @@
   .btnAuth {
     flex-direction: row;
     gap: 6px;
+  }
+
+  .btnReg {
+    background-color: var(--main);
+    color: var(--white);
+    transition: all 0.2s ease;
+  }
+
+  .btnReg:hover,
+  .btnReg:focus {
+    background-color: var(--white);
+    color: var(--main);
+  }
+
+  .btnLogIn {
+    color: var(--main);
   }
 }
 

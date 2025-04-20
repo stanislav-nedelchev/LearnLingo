@@ -26,9 +26,10 @@
   flex-direction: column;
   gap: 32px;
   border-radius: 12px;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.9);
   padding: 16px;
   z-index: 10;
+  color: var(--white);
 }
 
 @media screen and (min-width: 768px) {

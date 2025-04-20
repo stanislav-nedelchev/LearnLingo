@@ -5,6 +5,7 @@
   border-radius: 30px;
   padding: 24px;
   background-color: var(--white);
+  color: var(--main);
 }
 
 .modalCloseButton {

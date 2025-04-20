@@ -9,7 +9,7 @@ const HeroImg = () => {
         className={css.heroBoyImg}
       />
       <div className={css.heroIMac}>
-        <svg width="47" height="57" className={css.svgApple}>
+        <svg className={css.svgApple}>
           <use href="/sprite.svg#apple"></use>
         </svg>
       </div>

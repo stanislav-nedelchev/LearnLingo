@@ -1,29 +1,56 @@
 .heroImg {
   position: relative;
   border-radius: 30px;
-  width: 568px;
-  height: 530px;
+  width: 100%;
+  max-width: 568px;
+  aspect-ratio: 568 / 530;
   background-color: var(--theme-light);
 }
 
 .heroBoyImg {
-  width: 339px;
-  height: 339px;
-  margin: 80px auto auto;
+  max-width: 339px;
+  width: 60%;
+  aspect-ratio: 1 / 1;
+  margin-inline: auto;
+  margin-top: 12%;
 }
 
 .heroIMac {
   position: absolute;
-  width: 362px;
-  height: 176px;
+  width: 66.66%;
+  max-width: 362px;
+  aspect-ratio: 362 / 176;
   border-radius: 8px 8px 0 0;
   background-color: var(--theme);
-  left: 104px;
+  left: 50%;
+  transform: translate(-50%);
   bottom: 0;
 }
 
 .svgApple {
   display: block;
-  margin: 65px auto auto;
+  width: 13%;
+  aspect-ratio: 47 / 57;
+  margin-inline: auto;
+  margin-top: 17%;
   fill: rgba(255, 255, 255, 0.4);
+}
+
+@media screen and (min-width: 768px) {
+  .heroBoyImg {
+    margin-top: 80px;
+  }
+
+  .svgApple {
+    margin-top: 65px;
+    width: 47px;
+    height: 57px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .heroImg {
+    width: 568px;
+    flex-shrink: 0;
+  }
 }
