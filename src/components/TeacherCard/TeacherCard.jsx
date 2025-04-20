@@ -99,7 +99,7 @@ const TeacherCard = React.memo(({ teacher, selectedLevel }) => {
             <use href="/sprite.svg#heart"></use>
           </svg>
         </button>
-        <p className={css.textLang}>Languages</p>
+        <p className={css.textLang}>Teacher</p>
         <p className={css.teacherName}>
           {teacher.name} {teacher.surname}
         </p>
