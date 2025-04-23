@@ -7,7 +7,6 @@ import {
   updateProfile,
 } from 'firebase/auth';
 import { auth } from '../../api/firebaseConfig.js';
-// import { ref, set } from 'firebase/database';
 
 export const apiRegisterUser = createAsyncThunk(
   'auth/registerUser',
@@ -22,11 +21,6 @@ export const apiRegisterUser = createAsyncThunk(
       await updateProfile(userCredential.user, {
         displayName: name,
       });
-
-      // const userRef = ref(db, 'users/' + userCredential.user.uid);
-      // await set(userRef, {
-      //   favorites: [],
-      // });
 
       return {
         user: {

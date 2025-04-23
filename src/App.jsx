@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { apiGetCurrentUser } from './redux/auth/authOperations.js';
-import { selectUserDataIsRefreshing } from './redux/auth/authSelector.js';
+import { selectUserDataIsAuthReady } from './redux/auth/authSelector.js';
 import Loader from './components/Loader/Loader.jsx';
 import Header from './components/Header/Header.jsx';
 import PrivateRoute from './components/PrivateRoute.jsx';
@@ -18,13 +18,13 @@ const FavoritesPage = lazy(() =>
 
 function App() {
   const dispatch = useDispatch();
-  const isRefreshing = useSelector(selectUserDataIsRefreshing);
+  const isAuthReady = useSelector(selectUserDataIsAuthReady);
 
   useEffect(() => {
     dispatch(apiGetCurrentUser());
   }, [dispatch]);
 
-  if (isRefreshing) {
+  if (!isAuthReady) {
     return <Loader />;
   }
 

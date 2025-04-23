@@ -13,6 +13,7 @@ const INITIAL_STATE = {
   token: null,
   isRefreshing: false,
   isLoggedIn: false,
+  isAuthReady: false,
 };
 
 const authSlice = createSlice({
@@ -53,15 +54,18 @@ const authSlice = createSlice({
       .addCase(apiGetCurrentUser.pending, state => {
         state.isRefreshing = true;
         state.error = null;
+        state.isAuthReady = false;
       })
       .addCase(apiGetCurrentUser.fulfilled, (state, action) => {
         state.isRefreshing = false;
         state.isLoggedIn = true;
         state.userData = action.payload.user;
+        state.isAuthReady = true;
       })
       .addCase(apiGetCurrentUser.rejected, (state, action) => {
         state.isRefreshing = false;
         state.error = action.payload;
+        state.isAuthReady = true;
       })
 
       .addCase(apiLogoutUser.pending, state => {
@@ -69,7 +73,10 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(apiLogoutUser.fulfilled, () => {
-        return INITIAL_STATE;
+        return {
+          ...INITIAL_STATE,
+          isAuthReady: true,
+        };
       })
       .addCase(apiLogoutUser.rejected, (state, action) => {
         state.isLoading = false;
